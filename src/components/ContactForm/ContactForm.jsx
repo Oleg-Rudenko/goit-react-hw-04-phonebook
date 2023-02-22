@@ -12,9 +12,10 @@ export class ContactForm extends Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
+
   handleSubmit = e => {
     e.preventDefault();
-    const from = e.currentTarget;
+    const form = e.currentTarget;
     this.props.handleSubmit(this.state);
     form.reset();
   };
@@ -24,8 +25,9 @@ export class ContactForm extends Component {
 
     return (
       <form className={css.form} onSubmit={this.handleSubmit}>
-        <label className={css.formLabel}>Name</label>
+        <label className={css.formLabel}>Name </label>
         <input
+          className={css.formName}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -35,8 +37,9 @@ export class ContactForm extends Component {
           value={name}
           onChange={this.handleChange}
         />
-        <label className={css.formLabel}>Number</label>
+        <label className={css.formLabel}>Number </label>
         <input
+          className={css.formNumber}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -53,6 +56,7 @@ export class ContactForm extends Component {
     );
   }
 }
+
 ContactForm.propTypes = {
   handleSubmit: propTypes.func.isRequired,
 };

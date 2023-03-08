@@ -7,7 +7,7 @@ import { ContactList } from './ContactList/ContactList';
 export const App = () => {
   const [contacts, setContacts] = useState([]);
 
-    const [firstRenderFlag, setFlag] = useState(true);
+ const [firstRenderFlag, setFlag] = useState(true);
 
   const [filter, setFilter] = useState('');
   useEffect(() => {}, []);
@@ -29,60 +29,57 @@ export const App = () => {
     }
   }, [contacts, firstRenderFlag]);
 
- const handleChange = e => {
+  const handleChange = e => {
     const { value } = e.target;
     setFilter(value);
   };
 
- const  handleSubmit = e => {
+  const handleSubmit = e => {
     const id = nanoid();
     const name = e.name;
     const number = e.number;
-    const contactsList = [...contacts];
+    const contactsLists = [...contacts];
 
-    if (contactsList.findIndex(contact => name === contact.name) !== -1) {
-      alert(`${name} is already in contacts`);
+    if (contactsLists.findIndex(contact => name === contact.name) !== -1) {
+      alert(`${name} is already in contacts.`);
     } else {
-      contactsList.push({ name, id, number });
+      contactsLists.push({ id, name, number });
     }
-   setContacts(contactsList);
+
+    setContacts(contactsLists);
   };
 
- const  handleDelete = e => {
-   setContacts(contacts.filter(contact => contact.id !== e));
+  const handleDelete = e => {
+    setContacts(contacts.filter(contact => contact.id !== e));
   };
 
   const getFilteredContacts = () => {
     const filterContactsList = contacts.filter(contact => {
-      return contact.name.toLowerCase().includes(this.state.filter.toLowerCase());
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
     });
     return filterContactsList;
   };
 
-    return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 20,
-          color: '#010101',
-        }}
-      >
-        <h1>Phonebook</h1>
-        <ContactForm handleSubmit={handleSubmit} />
-
-        <h2>Contacts</h2>
-        <Filter filter={filter} handleChange={handleChange} />
-        <ContactList
-          contacts={getFilteredContacts()}
-          handleDelete={handleDelete}
-        />
-      </div>
-    );
-  }
-
-
-export default App;
+  return (
+    <div
+      style={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 20,
+        color: '#010101',
+      }}
+    >
+      <h1>Phonebook</h1>
+      <ContactForm handleSubmit={handleSubmit} />
+      <h2> Contacts</h2>
+      <Filter filter={filter} handleChange={handleChange} />
+      <ContactList
+        contacts={getFilteredContacts()}
+        handleDelete={handleDelete}
+      />
+    </div>
+  );
+};

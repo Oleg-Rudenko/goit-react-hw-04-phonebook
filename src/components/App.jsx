@@ -10,7 +10,7 @@ export const App = () => {
  const [firstRenderFlag, setFlag] = useState(true);
 
   const [filter, setFilter] = useState('');
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   useEffect(() => {
     if (firstRenderFlag) {
